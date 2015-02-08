@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="js/jquery.mobile-1.4.5.css" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap.css" />
+        <title>Calculo de Masa Corporal</title>
+		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+<script>
+function cargar(){
+	document.addEventListener("deviceready", onDeviceReady, false);
+	
+	
+}
+	function onDeviceReady() {
+		// Register the event listener
+		document.addEventListener("backbutton",onBackButton,false);
+		//document.getElementById("ingreso").innerHTML += "<br> nueva linea";  // Agrego nueva linea antes
+	}
+	
+	function onBackButton(){
+		alert("saliendo de la aplicación");
+	}
+	
+function calculaIMC()
+ {
+	
+	var peso, altura, imc, leyenda;
+	
+	peso=document.getElementById("peso").value;
+	altura=document.getElementById("altura").value/100;
+	imc=peso/(altura*altura);
+	document.getElementById("imc").value=imc.toFixed(2);
+	
+	if(imc<=20.5)
+	{
+	
+		leyenda="Estas delgado. Debes engordar " + (altura*altura*20.5-peso).toFixed(1) + " kilos";
+	}
+	else if(imc>=25.5)
+	{
+		
+		leyenda="Tienes sobrepeso. Debes adelgazar "+(peso-altura*altura*25.5).toFixed(1) +" kilos";
+	}
+	else
+	{
+		leyenda="Estas en tu peso ideal";
+	}
+	document.getElementById("leyenda").value=leyenda;
+ } 
+</script>
+    </head>
+    <body style="background:rgba(110,77,170,0.5)" onload=cargar();>
+        <div id="ingreso" class="ui-shadow" style="background:#FFF" style="padding:5px; border-radius:7px;">
+			<form name="f1" id="f1" action="" class="form">
+				<fieldset class="form-group">
+					
+				<h3>CALCULO DEL PESO IDEAL IMC (Indice de Masa Corporal)</h3>
+				<p>Peso en kg.:
+				<input type="number" name="peso" id="peso" size="3" maxlength="4" class="form-control">
+				</p>
+				<p>Altura en cm.:
+				<input type="number" name="altura" id="altura" size="3" maxlength="3" class="form-control"><br>
+				<input type="button" value="Calcular IMC" onClick="calculaIMC()" class="btn btn-primary">
+				</p>
+			<p> IMC:
+				<input type="text" name="imc" id="imc" size="10" maxlength="15" class="form-control">
+		Leyenda:
+					<input type="text" name="leyenda" id="leyenda" size="22" class="form-control">
+				</p>
+			</fieldset>
+		</form> 
+        </div>
+		<br>
+		<div>
+			
+		</div>
+		<br>
+        <div id="nueva" class="ui-shadow-isset">
+		</div>
+		
+    </body>
+</html>
